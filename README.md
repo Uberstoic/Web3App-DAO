@@ -29,32 +29,6 @@ A decentralized autonomous organization (DAO) governance portal that allows toke
 - Token deposits and withdrawals
 - Timelock mechanism for proposal voting
 
-## Getting Started
-
-### Local Development
-
-1. Clone the repository:
-```bash
-git clone https://github.com/yourusername/Web3App-DAO.git
-cd Web3App-DAO/dao-frontend
-```
-
-2. Install dependencies:
-```bash
-npm install
-```
-
-3. Create a `.env` file:
-```env
-REACT_APP_ALCHEMY_KEY=your_alchemy_key
-REACT_APP_CONTRACT_ADDRESS=0x64b2428983d5ab66ad0849b93d83113b980ccf32
-```
-
-4. Start the development server:
-```bash
-npm start
-```
-
 ## Usage Guide
 
 1. **Connect Wallet**
