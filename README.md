@@ -23,11 +23,6 @@ A decentralized autonomous organization (DAO) governance portal that allows toke
 - **Build Tool**: CRACO (Create React App Configuration Override)
 - **Deployment**: Vercel
 
-## Smart Contract
-
-The DAO is controlled by a smart contract deployed on Sepolia testnet at:
-`0x64b2428983d5ab66ad0849b93d83113b980ccf32`
-
 ### Contract Features
 - Token-based voting system
 - Proposal creation and execution
@@ -35,11 +30,6 @@ The DAO is controlled by a smart contract deployed on Sepolia testnet at:
 - Timelock mechanism for proposal voting
 
 ## Getting Started
-
-### Prerequisites
-- Node.js (v14+ recommended)
-- MetaMask wallet
-- Some Sepolia ETH for gas fees
 
 ### Local Development
 
@@ -65,15 +55,6 @@ REACT_APP_CONTRACT_ADDRESS=0x64b2428983d5ab66ad0849b93d83113b980ccf32
 npm start
 ```
 
-### Production Deployment
-
-The project is configured for deployment on Vercel. To deploy:
-
-1. Fork this repository
-2. Import the project in Vercel
-3. Configure environment variables in Vercel dashboard
-4. Deploy!
-
 ## Usage Guide
 
 1. **Connect Wallet**
@@ -95,23 +76,3 @@ The project is configured for deployment on Vercel. To deploy:
 4. **Withdraw Tokens**
    - Click "Withdraw All" to withdraw your deposited tokens
    - Confirm the transaction in MetaMask
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-- [Ethereum Foundation](https://ethereum.org/)
-- [Web3-React](https://github.com/NoahZinsmeister/web3-react)
-- [Ethers.js](https://docs.ethers.io/)
