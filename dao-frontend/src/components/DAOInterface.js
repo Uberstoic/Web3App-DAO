@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useWeb3React } from '@web3-react/core';
 import { ethers } from 'ethers';
 import { injected, getContract } from '../utils/web3';
@@ -8,43 +8,26 @@ const DAOInterface = () => {
   const [proposals, setProposals] = useState([]);
   const [userDeposit, setUserDeposit] = useState('0');
   const [depositAmount, setDepositAmount] = useState('');
-  const [votingToken, setVotingToken] = useState('');
   const [loading, setLoading] = useState(false);
   const [transactionPending, setTransactionPending] = useState(false);
   const [voteAmounts, setVoteAmounts] = useState({});
 
-  const connect = async () => {
-    try {
-      await activate(injected);
-      // Check if we're on the correct network
-      const provider = window.ethereum;
-      const chainId = await provider.request({ method: 'eth_chainId' });
-      if (chainId !== '0xaa36a7') { // Sepolia chainId in hex
-        try {
-          await provider.request({
-            method: 'wallet_switchEthereumChain',
-            params: [{ chainId: '0xaa36a7' }], // Sepolia
-          });
-        } catch (switchError) {
-          console.error('Failed to switch network:', switchError);
-          alert('Please switch to Sepolia testnet in your MetaMask wallet');
-        }
+  // Load user deposit information
+  const loadUserDeposit = useCallback(async () => {
+    if (library && account) {
+      try {
+        const signer = library.getSigner(account);
+        const contract = getContract(signer);
+        const userInfo = await contract.userInfo(account);
+        setUserDeposit(ethers.utils.formatEther(userInfo.depositedAmount));
+      } catch (error) {
+        console.error('Error loading user deposit:', error);
       }
-    } catch (error) {
-      console.error('Error connecting wallet:', error);
-      alert('Failed to connect wallet. Please make sure MetaMask is installed and unlocked.');
     }
-  };
+  }, [library, account]);
 
-  const disconnect = () => {
-    try {
-      deactivate();
-    } catch (error) {
-      console.error('Error disconnecting wallet:', error);
-    }
-  };
-
-  const loadProposals = async () => {
+  // Load proposals
+  const loadProposals = useCallback(async () => {
     if (library && account) {
       try {
         setLoading(true);
@@ -77,18 +60,36 @@ const DAOInterface = () => {
         setLoading(false);
       }
     }
+  }, [library, account]);
+
+  const connect = async () => {
+    try {
+      await activate(injected);
+      // Check if we're on the correct network
+      const provider = window.ethereum;
+      const chainId = await provider.request({ method: 'eth_chainId' });
+      if (chainId !== '0xaa36a7') { // Sepolia chainId in hex
+        try {
+          await provider.request({
+            method: 'wallet_switchEthereumChain',
+            params: [{ chainId: '0xaa36a7' }], // Sepolia
+          });
+        } catch (switchError) {
+          console.error('Failed to switch network:', switchError);
+          alert('Please switch to Sepolia testnet in your MetaMask wallet');
+        }
+      }
+    } catch (error) {
+      console.error('Error connecting wallet:', error);
+      alert('Failed to connect wallet. Please make sure MetaMask is installed and unlocked.');
+    }
   };
 
-  const loadUserDeposit = async () => {
-    if (library && account) {
-      try {
-        const signer = library.getSigner(account);
-        const contract = getContract(signer);
-        const deposit = await contract.getDeposit(account);
-        setUserDeposit(ethers.utils.formatEther(deposit));
-      } catch (error) {
-        console.error('Error loading user deposit:', error);
-      }
+  const disconnect = () => {
+    try {
+      deactivate();
+    } catch (error) {
+      console.error('Error disconnecting wallet:', error);
     }
   };
 
@@ -176,12 +177,13 @@ const DAOInterface = () => {
     }
   };
 
+  // Effect to load data when wallet is connected
   useEffect(() => {
     if (active && library && account) {
       loadProposals();
       loadUserDeposit();
     }
-  }, [active, library, account]);
+  }, [active, library, account, loadProposals, loadUserDeposit]);
 
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
