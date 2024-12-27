@@ -6,7 +6,7 @@ A decentralized autonomous organization (DAO) governance portal that allows toke
 
 ## Features
 
-- 🦊 **MetaMask Integration**: Seamless wallet connection and network switching
+- 🦊 **MetaMask and WalletConnect Integration**: Seamless wallet connection and network switching
 - 🗳️ **Proposal Voting**: View and vote on active proposals
 - 💰 **Token Management**: Deposit and withdraw governance tokens
 - 📊 **Real-time Updates**: Live tracking of proposal status and vote counts
