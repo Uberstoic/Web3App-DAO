@@ -277,7 +277,7 @@ const DAOInterface = () => {
               className="wallet-button"
               disabled={loading}
             >
-              <img src="/metamask.svg?v=1" alt="MetaMask" />
+              <img src="/metamask.svg" alt="MetaMask" />
               {loading ? 'Connecting...' : 'Connect MetaMask'}
             </button>
             <button 
@@ -285,7 +285,7 @@ const DAOInterface = () => {
               className="wallet-button"
               disabled={loading}
             >
-              <img src="/walletconnect.svg?v=1" alt="WalletConnect" />
+              <img src="/walletconnect.svg" alt="WalletConnect" />
               {loading ? 'Connecting...' : 'Connect WalletConnect'}
             </button>
           </div>

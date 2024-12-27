@@ -4,7 +4,12 @@ module.exports = {
     "./public/index.html",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'metamask': "url('/metamask.svg')",
+        'walletconnect': "url('/walletconnect.svg')",
+      },
+    },
   },
   plugins: [],
 }
