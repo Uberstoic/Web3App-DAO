@@ -19,6 +19,13 @@
       "dest": "/favicon.ico"
     },
     {
+      "src": "/(.*)\\.svg",
+      "headers": {
+        "Content-Type": "image/svg+xml"
+      },
+      "dest": "/$1.svg"
+    },
+    {
       "src": "/manifest.json",
       "dest": "/manifest.json"
     },
